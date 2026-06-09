@@ -1,0 +1,19 @@
+idf_component_register(
+    SRCS
+        "main.c"
+        "input/board_audio.c"
+        "input/wake_afe.c"
+        "input/recorder.c"
+        "shared/wav.c"
+        "output/capture_output.c"
+        "output/status_led.c"
+        "core/voice_session.c"
+        "core/wifi_connect.c"
+        "core/backend_client.c"
+    INCLUDE_DIRS
+        "."
+        "input"
+        "core"
+        "output"
+        "shared"
+)

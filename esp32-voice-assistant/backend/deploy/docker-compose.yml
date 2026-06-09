@@ -1,0 +1,37 @@
+name: siri-backend
+
+services:
+  backend:
+    build:
+      context: ../api
+    restart: unless-stopped
+    environment:
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GROQ_STT_MODEL: ${GROQ_STT_MODEL:-whisper-large-v3-turbo}
+      EDGE_TTS_VOICE: ${EDGE_TTS_VOICE:-de-DE-KatjaNeural}
+      EDGE_TTS_RATE: ${EDGE_TTS_RATE:-+25%}
+      VOICE_API_TOKEN: ${VOICE_API_TOKEN:-test-token}
+      AGENT_BRIDGE_URL: ${AGENT_BRIDGE_URL:-http://agent-bridge:8010/ask}
+      AGENT_BRIDGE_TOKEN: ${AGENT_BRIDGE_TOKEN:-test-agent-token}
+      AGENT_TIMEOUT_SECONDS: ${AGENT_TIMEOUT_SECONDS:-60}
+    ports:
+      - "127.0.0.1:8000:8000"
+
+  agent-bridge:
+    build:
+      context: ../agent-bridge
+    restart: unless-stopped
+    user: "${AGENT_BRIDGE_UID:-1000}:${AGENT_BRIDGE_GID:-1000}"
+    environment:
+      AGENT_BRIDGE_TOKEN: ${AGENT_BRIDGE_TOKEN:-test-agent-token}
+      AGENT_BRIDGE_PORT: ${AGENT_BRIDGE_PORT:-8010}
+      AGENT_TIMEOUT_MS: ${AGENT_TIMEOUT_MS:-60000}
+      AGENT_BRIDGE_LOG_PATH: /home/node/.pi/logs/voice-bridge.jsonl
+      HOME: /home/node
+      VOICE_CONTEXT_DIR: /home/node/.pi/agent
+      VOICE_PI_WEB_SEARCH_EXTENSION: /home/node/.pi/agent/extensions/codex-web-search
+      VOICE_PI_SYSTEM_PROMPT_SOURCE: /home/node/.pi/agent/SYSTEM.md
+    expose:
+      - "8010"
+    volumes:
+      - ./.pi:/home/node/.pi

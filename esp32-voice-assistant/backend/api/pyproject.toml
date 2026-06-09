@@ -1,0 +1,21 @@
+[project]
+name = "siri-backend"
+version = "0.1.0"
+description = "FastAPI backend for the Siri chat stream"
+requires-python = ">=3.13"
+dependencies = [
+    "edge-tts>=7.2.3",
+    "fastapi>=0.125.0",
+    "groq>=0.37.1",
+    "httpx>=0.28.0",
+    "python-multipart>=0.0.20",
+    "uvicorn[standard]>=0.38.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]

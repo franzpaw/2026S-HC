@@ -1,0 +1,69 @@
+menu "Voice Client"
+
+    config VOICE_WIFI_SSID
+        string "Wi-Fi SSID"
+        default ""
+        help
+            Wi-Fi network name for station mode.
+
+    config VOICE_WIFI_PASSWORD
+        string "Wi-Fi password"
+        default ""
+        help
+            Wi-Fi password for station mode.
+
+    config VOICE_WIFI_MAX_RETRY
+        int "Wi-Fi max retries"
+        default 5
+        range 1 20
+        help
+            Number of reconnect attempts before the boot-time Wi-Fi connect call fails.
+
+    config VOICE_WIFI_CONNECT_TIMEOUT_MS
+        int "Wi-Fi connect timeout in milliseconds"
+        default 20000
+        range 1000 120000
+        help
+            Maximum time to wait for a Wi-Fi connection during boot.
+
+    config VOICE_BACKEND_BASE_URL
+        string "Backend base URL"
+        default "https://example.invalid"
+        help
+            Backend origin without a trailing slash, for example https://example.invalid.
+
+    config VOICE_API_TOKEN
+        string "Voice API bearer token"
+        default ""
+        help
+            Bearer token used for backend requests.
+
+    config VOICE_BACKEND_TIMEOUT_MS
+        int "Backend health timeout in milliseconds"
+        default 10000
+        range 1000 120000
+        help
+            Maximum time to wait for the backend health request.
+
+    config VOICE_CHAT_TIMEOUT_MS
+        int "Backend chat stream timeout in milliseconds"
+        default 120000
+        range 1000 300000
+        help
+            Maximum time to wait for one uploaded audio chat stream.
+
+    config VOICE_SSE_LINE_MAX_BYTES
+        int "Maximum SSE data line size in bytes"
+        default 2621440
+        range 4096 5242880
+        help
+            Maximum size for one backend SSE data line. WAV audio_base64 can be large.
+
+    config VOICE_PLAY_VOLUME
+        int "Speaker playback volume"
+        default 40
+        range 0 100
+        help
+            Speaker output volume passed to the ES8311 codec.
+
+endmenu

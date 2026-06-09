@@ -1,0 +1,10 @@
+{
+  "name": "voice-codex-web-search",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Pi extension that exposes native OpenAI Codex web_search for the voice agent profile.",
+  "type": "module",
+  "pi": {
+    "extensions": ["./index.ts"]
+  }
+}

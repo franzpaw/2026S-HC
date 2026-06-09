@@ -1,0 +1,35 @@
+# Secrets / local config
+.env
+.env.*
+!.env.example
+sdkconfig
+sdkconfig.old
+**/auth.json
+**/sessions/
+**/logs/
+*.bak
+*.bak-*
+
+# ESP-IDF build output
+build/
+managed_components/
+dependencies.lock
+
+# Rust build output
+/target/
+**/target/
+
+# Python
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Node
+node_modules/
+dist/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

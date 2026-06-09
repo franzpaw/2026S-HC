@@ -1,0 +1,16 @@
+{
+  "name": "siri-agent-bridge",
+  "version": "0.1.0",
+  "description": "Local voice-to-Pi agent bridge for siri-v2 Phase 1.2",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "jiti": "^2.7.0",
+    "typescript": "^5.9.3"
+  }
+}
