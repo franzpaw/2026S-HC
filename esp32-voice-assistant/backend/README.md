@@ -27,7 +27,7 @@ Backend does:
 
 ```text
 Groq STT
-Pi/Codex agent orchestration
+Pi agent orchestration
 Edge TTS
 WAV audio response
 ```
@@ -55,15 +55,6 @@ AGENT_BRIDGE_TOKEN    internal backend -> agent-bridge token
 GROQ_API_KEY          STT provider key
 EDGE_TTS_VOICE        spoken voice
 EDGE_TTS_RATE         speech speed, e.g. +25%
-```
-
-Do not commit:
-
-```text
-deploy/.env
-deploy/.pi/agent/auth.json
-deploy/.pi/agent/sessions/
-deploy/.pi/logs/
 ```
 
 ## Local Run
@@ -120,46 +111,4 @@ Enable extension in:
 
 ```text
 deploy/.pi/agent/settings.json
-```
-
-After changing prompt, skill, or extension:
-
-```bash
-cd backend/deploy
-docker compose restart agent-bridge
-```
-
-If backend Python/Node code changed:
-
-```bash
-docker compose up -d --build
-```
-
-## Deployment
-
-Need one reachable host:
-
-```text
-VPS, home server, or any Docker host reachable by ESP32
-```
-
-If ESP32 is not on same machine/network, expose backend through HTTPS domain/reverse proxy.
-
-Typical production:
-
-```text
-ESP32 -> https://<your-domain> -> reverse proxy -> 127.0.0.1:8000 -> Docker backend
-```
-
-Set ESP32 backend URL in ESP-IDF menuconfig:
-
-```text
-Voice Client -> Backend base URL
-```
-
-Secrets stay outside Git:
-
-```text
-backend/deploy/.env
-ESP32 sdkconfig
 ```
